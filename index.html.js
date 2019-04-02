@@ -202,7 +202,7 @@ function definitionClick(e) {
       return;
     }
     definitionRequest.onreadystatechange = updateDefinition;
-    definitionRequest.open('GET', urlPrefix + '/word/' + definitionWord + '.json');
+    definitionRequest.open('GET', urlPrefix + '/stdict_word/data/' + definitionWord + '.json');
     definitionRequest.setRequestHeader('Content-Type', 'application/json'); // TODO: support IE 9-10, using text/plain
     lastDefinition = definitionWord;
     definitionRequest.send();
@@ -272,7 +272,7 @@ function searchButtonClick() {
       return false;
     }
     searchRequest.onreadystatechange = updateSearchResult;
-    searchRequest.open('GET', urlPrefix + '/same/' + searchText + '.json');
+    searchRequest.open('GET', urlPrefix + '/stdict_same/data/' + searchText + '.json');
     searchRequest.setRequestHeader('Content-Type', 'application/json'); // TODO: support IE 9-10, using text/plain
     lastSearch = searchText;
     searchRequest.send();
@@ -289,9 +289,9 @@ function init() {
   if (document.domain === '') {
     urlPrefix = './data'; // for local use; it'll not work
   } else if (document.domain.includes('github')) {
-    urlPrefix = '/stdictdb'; // for github pages; username.github.io/projectname/...
+    urlPrefix = ''; // for github pages; username.github.io/projectname/...
   } else {
-    urlPrefix = '/data';
+    urlPrefix = '/data'; // for test
   }
 
   document.getElementById('search-button').addEventListener('click', searchButtonClick);
