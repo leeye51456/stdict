@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>누적형 사전</title>
+    <link rel="stylesheet" type="text/css" href="index.html.css">
+    <script type="text/javascript" src="index.html.js"></script>
+  </head>
+
+  <body>
+    <div id="header-div" class="page-padding">
+      <section id="header-section">
+        <div class="header title">
+          누적형 사전
+        </div>
+        <div class="header center">
+          <ul>
+            <li><input type="text" id="search-text"></li>
+            <li><button id="search-button">찾기</button></li>
+          </ul>
+        </div>
+      </section> <!-- search-section -->
+    </div> <!-- header-div -->
+
+    <div id="result-contents-div" class="page-padding">
+
+      <section id="result-section">
+        <div id="result-found-div">
+          <p>
+            ‘<span id="query-span"></span>’에 대한 검색 결과입니다. (총 <span id="num-of-result-span"></span>건)
+          </p>
+          <div id="result-div">
+          </div> <!-- result-div -->
+        </div> <!-- result-found-div -->
+      </section> <!-- result-section -->
+
+      <section id="definition-section" class="center">
+      </section> <!-- definition-section -->
+
+     </div> <!-- result-contents-div -->
+
+  </body>
+</html>

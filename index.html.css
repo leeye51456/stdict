@@ -1,0 +1,163 @@
+html {
+  font-family: "Apple SD Gothic Neo", "NanumBarunGothic", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding-top: 60px;
+}
+
+input[type=text], button {
+  box-sizing: border-box;
+  font-family: "Apple SD Gothic Neo", "NanumBarunGothic", "Malgun Gothic", sans-serif;
+}
+input[type=text] {
+  font-size: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+button {
+  font-size: 16px;
+}
+
+
+.page-padding {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0 60px;
+}
+
+
+#header-div {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  padding: 10px 60px;
+  height: 60px;
+  background-color: lightgray;
+}
+.header {
+  height: 40px;
+  line-height: 40px;
+}
+.header > ul {
+  margin: 0;
+  padding: 0;
+}
+.header > ul > li {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle; /* TODO: fix y error */
+}
+.header input[type=text] {
+  width: 400px;
+  height: 40px;
+}
+.header button {
+  width: 80px;
+  height: 40px;
+}
+.title {
+  position: fixed;
+  top: 10px;
+  left: 60px;
+  font-size: 20px;
+}
+.center {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+#result-contents-div {
+  line-height: 1.6;
+}
+
+
+#result-section {
+  position: fixed;
+  z-index: 10;
+  box-sizing: border-box;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  padding: 30px 30px 30px 60px;
+  width: 360px;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#result-found-div p {
+  margin: 0 0 1em;
+}
+#result-div dl {
+  margin: 0;
+  padding: 0.5em;
+  border-top: 1px solid darkgray;
+  cursor: pointer;
+}
+#result-div dl:hover {
+  background-color: aliceblue;
+}
+#result-div dt {
+  font-weight: bold;
+}
+#result-div dd {
+  margin: 0;
+  max-height: 4.8em;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+}
+#result-found-div > :first-child {
+  margin-top: 0;
+}
+
+
+#definition-section {
+  z-index: 1;
+  padding-top: 30px;
+}
+#definition-section dl {
+  margin: 0 0 1.5em;
+  padding: 1em;
+  border: 1px solid darkgray;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+#definition-section dt {
+  font-size: 18px;
+  font-weight: bold;
+}
+#definition-section dd {
+  margin: 0;
+}
+#definition-section p {
+  margin: 0.5em 0 0;
+}
+#definition-section p.level0 {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid lightgray;
+  font-size: 18px;
+  font-weight: bold;
+}
+#definition-section p.level1 {
+  margin-top: 0.75em;
+  font-size: 16px;
+  font-weight: bold;
+}
+#definition-section p.level2 {
+}
+#definition-section > dl > dd > p:first-of-type {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid lightgray;
+}
+#definition-section ul {
+  margin: 0;
+  font-size: 14px;
+}
