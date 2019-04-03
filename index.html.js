@@ -289,7 +289,7 @@ function init() {
   if (document.domain === '') {
     urlPrefix = './data'; // for local use; it'll not work
   } else if (document.domain.includes('github')) {
-    urlPrefix = 'https://raw.githubusercontent.com/leeye51456/stdictdb/master'; // for github pages
+    urlPrefix = '/stdictdb'; // for github pages
   } else {
     urlPrefix = '/data'; // for test
   }
