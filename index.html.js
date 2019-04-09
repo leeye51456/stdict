@@ -288,7 +288,7 @@ function init() {
 
   if (document.domain === '') {
     urlPrefix = './data'; // for local use; it'll not work
-  } else if (document.domain.includes('github')) {
+  } else if (document.domain.indexOf('github') >= 0) { // Some browsers don't support string.includes(string)
     urlPrefix = '/stdictdb'; // for github pages
   } else {
     urlPrefix = '/data'; // for test
