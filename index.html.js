@@ -303,4 +303,4 @@ function init() {
   });
   document.getElementById('search-text').focus();
 }
-window.addEventListener('load', init);
+window.addEventListener('DOMContentLoaded', init);
