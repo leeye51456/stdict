@@ -7,7 +7,8 @@
   JSON, XMLHttpRequest
 */
 
-var urlPrefix, lastSearch, lastDefinition;
+var urlPrefix, lastSearch, lastDefinition,
+  stackPosition = 'bottom';
 
 
 function definitionClick(e) {
@@ -183,8 +184,13 @@ function definitionClick(e) {
         
         dlElem.style.backgroundColor = 'lightskyblue';
         dlElem.style.transition = 'background-color 1s';
-        definitionSection.insertBefore(dlElem, definitionSection.children[0]);
-        window.scrollTo(0, 0);
+        if (stackPosition === 'top') {
+          definitionSection.insertBefore(dlElem, definitionSection.children[0]);
+          window.scrollTo(0, 0);
+        } else {
+          definitionSection.appendChild(dlElem);
+          window.scrollTo(0, dlElem.getBoundingClientRect().top + document.documentElement.scrollTop - 90);
+        }
         window.setTimeout(function () {
           dlElem.style.backgroundColor = 'white';
         }, 50);
@@ -203,7 +209,7 @@ function definitionClick(e) {
     }
     definitionRequest.onreadystatechange = updateDefinition;
     definitionRequest.open('GET', urlPrefix + '/word/' + definitionWord + '.json');
-    definitionRequest.setRequestHeader('Content-Type', 'application/json'); // TODO: support IE 9-10, using text/plain
+    definitionRequest.setRequestHeader('Content-Type', 'application/json');
     lastDefinition = definitionWord;
     definitionRequest.send();
   }
@@ -273,7 +279,7 @@ function searchButtonClick() {
     }
     searchRequest.onreadystatechange = updateSearchResult;
     searchRequest.open('GET', urlPrefix + '/same/' + searchText + '.json');
-    searchRequest.setRequestHeader('Content-Type', 'application/json'); // TODO: support IE 9-10, using text/plain
+    searchRequest.setRequestHeader('Content-Type', 'application/json');
     lastSearch = searchText;
     searchRequest.send();
   }
@@ -283,8 +289,31 @@ function searchButtonClick() {
 }
 
 
+function directionButtonClick(e) {
+  var buttonId;
+
+  function enableSearch() {
+    var searchText;
+    document.getElementById('definition-section').innerHTML = '';
+    searchText = document.getElementById('search-text');
+    searchText.removeAttribute('disabled');
+    document.getElementById('search-button').removeAttribute('disabled');
+    searchText.focus();
+  }
+
+  buttonId = e.currentTarget.getAttribute('id');
+  if (buttonId === 'stack-top-button') {
+    stackPosition = 'top';
+  } else {
+    stackPosition = 'bottom';
+  }
+  enableSearch();
+}
+
+
 function init() {
   'use strict';
+  var searchButton, searchText;
 
   if (document.domain === '') {
     urlPrefix = './data'; // for local use; it'll not work
@@ -294,13 +323,18 @@ function init() {
     urlPrefix = '/data'; // for test
   }
 
-  document.getElementById('search-button').addEventListener('click', searchButtonClick);
-  document.getElementById('search-text').addEventListener('keypress', function (e) {
+  document.getElementById('stack-top-button').addEventListener('click', directionButtonClick);
+  document.getElementById('stack-bottom-button').addEventListener('click', directionButtonClick);
+  searchButton = document.getElementById('search-button');
+  searchText = document.getElementById('search-text');
+  searchButton.addEventListener('click', searchButtonClick);
+  searchText.addEventListener('keypress', function (e) {
     if (e.keyCode === 13) {
       e.preventDefault();
       document.getElementById("search-button").click();
     }
   });
-  document.getElementById('search-text').focus();
+  searchButton.setAttribute('disabled', 'disabled');
+  searchText.setAttribute('disabled', 'disabled');
 }
 window.addEventListener('DOMContentLoaded', init);
