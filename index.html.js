@@ -294,7 +294,19 @@ function searchButtonClick() {
 }
 
 
+function invertDirectionButtonClick() {
+  'use strict';
+  if (stackPosition === 'top') {
+    stackPosition = 'bottom';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 아래)';
+  } else {
+    stackPosition = 'top';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 위)';
+  }
+}
+
 function directionButtonClick(e) {
+  'use strict';
   var buttonId;
 
   function enableSearch() {
@@ -304,13 +316,16 @@ function directionButtonClick(e) {
     searchText.removeAttribute('disabled');
     document.getElementById('search-button').removeAttribute('disabled');
     searchText.focus();
+    document.getElementById('invert-direction-button').style.display = 'block';
   }
 
   buttonId = e.currentTarget.getAttribute('id');
   if (buttonId === 'stack-top-button') {
     stackPosition = 'top';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 위)';
   } else {
     stackPosition = 'bottom';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 아래)';
   }
   enableSearch();
 }
@@ -328,6 +343,7 @@ function init() {
     urlPrefix = '/data'; // for test
   }
 
+  document.getElementById('invert-direction-button').addEventListener('click', invertDirectionButtonClick);
   document.getElementById('stack-top-button').addEventListener('click', directionButtonClick);
   document.getElementById('stack-bottom-button').addEventListener('click', directionButtonClick);
   searchButton = document.getElementById('search-button');
