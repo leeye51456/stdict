@@ -230,8 +230,10 @@ function searchButtonClick() {
       if (searchRequest.status === 200) {
         var jsonObject, i, resultDiv, dlElem, dlInner;
         jsonObject = JSON.parse(searchRequest.responseText); // Array of Objects
+        document.getElementById('result-not-exist-span').style.display = 'none';
         document.getElementById('query-span').innerHTML = searchText;
         document.getElementById('num-of-result-span').innerHTML = jsonObject.length;
+        document.getElementById('result-exist-span').style.display = 'inline';
         resultDiv = document.getElementById('result-div');
         while (resultDiv.lastChild) {
           resultDiv.removeChild(resultDiv.lastChild);
@@ -261,8 +263,10 @@ function searchButtonClick() {
         document.getElementById('result-section').scrollTo(0, 0);
         return;
       } else {
+        document.getElementById('result-exist-span').style.display = 'none';
         document.getElementById('query-span').innerHTML = searchText;
         document.getElementById('num-of-result-span').innerHTML = 0;
+        document.getElementById('result-not-exist-span').style.display = 'inline';
         document.getElementById('result-div').innerHTML = '';
         return;
       }
@@ -285,6 +289,7 @@ function searchButtonClick() {
   }
 
   searchText = document.getElementById('search-text').value.trim();
+  document.getElementById('result-found-div').style.display = 'block';
   makeSearchRequest();
 }
 
