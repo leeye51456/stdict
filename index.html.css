@@ -16,9 +16,22 @@ input[type=text] {
   font-size: 20px;
   padding-left: 6px;
   padding-right: 6px;
+  border: 1px rgba(192, 192, 192, 0.5) solid;
+  background-color: #ffffff;
+  box-shadow: 0.5pt 0.5pt 2pt 0.5pt rgba(0, 0, 0, 0.2) inset;
 }
 button {
   font-size: 16px;
+  border: none;
+  background-color: #e8e8e8;
+  box-shadow: 0.75pt 0.75pt 3pt 0.75pt rgba(0, 0, 0, 0.2);
+}
+button:hover {
+  background-color: #e0e0e0;
+}
+button:active {
+  transform: translate(0, 1.5pt);
+  box-shadow: 0 0 3pt rgba(0, 0, 0, 0.2);
 }
 
 
@@ -31,13 +44,15 @@ button {
 
 
 #header-div {
+  box-sizing: border-box;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
   padding: 10px 60px;
   height: 60px;
-  background-color: lightgray;
+  border-bottom: 1px rgba(224, 224, 224, 0.5) solid;
+  background-color: rgba(248, 248, 248, 0.85);
 }
 .header {
   height: 40px;
@@ -51,7 +66,7 @@ button {
   display: inline-block;
   height: 40px;
   line-height: 40px;
-  vertical-align: middle; /* TODO: fix y error */
+  vertical-align: middle;
 }
 .header input[type=text] {
   width: 400px;
