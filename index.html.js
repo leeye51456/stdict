@@ -281,6 +281,7 @@ function searchButtonClick() {
   }
 
   function makeSearchRequest() {
+    var searchTextElem;
     if (searchText === '') {
       return;
     }
@@ -294,6 +295,18 @@ function searchButtonClick() {
     searchRequest.setRequestHeader('Content-Type', 'application/json');
     lastSearch = searchText;
     searchRequest.send();
+
+    searchTextElem = document.getElementById('search-text');
+    // https://stackoverflow.com/a/11160055
+    searchTextElem.setAttribute('readonly', 'readonly'); // Force keyboard to hide on input field.
+    searchTextElem.setAttribute('disabled', 'disabled'); // Force keyboard to hide on textarea field.
+    window.setTimeout(function () {
+      var searchTextElem = document.getElementById('search-text');
+      searchTextElem.blur();  //actually close the keyboard
+      // Remove readonly attribute after keyboard is hidden.
+      searchTextElem.removeAttribute('readonly');
+      searchTextElem.removeAttribute('disabled');
+    }, 50);
   }
 
   searchText = document.getElementById('search-text').value.trim();
