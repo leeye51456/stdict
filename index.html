@@ -16,7 +16,7 @@
         <div class="header center">
           <ul>
             <li><input type="text" id="search-text"></li>
-            <li><button id="search-button">찾기</button></li>
+            <li><button id="search-button">🔍</button></li>
           </ul>
         </div>
       </section> <!-- search-section -->
@@ -25,6 +25,10 @@
     <div id="result-contents-div" class="page-padding">
 
       <section id="result-section">
+        <div id="result-background-div"></div>
+        <div id="result-close-div">
+          <button id="result-close-button">❌</button>
+        </div>
         <div id="result-found-div">
           <p>
             ‘<span id="query-span"></span>’에 대한 검색 결과<span id="result-exist-span">입니다. (총 <span id="num-of-result-span"></span>건)</span><span id="result-not-exist-span">가 존재하지 않습니다.</span>

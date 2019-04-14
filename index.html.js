@@ -184,6 +184,7 @@ function definitionClick(e) {
         
         dlElem.style.backgroundColor = 'lightskyblue';
         dlElem.style.transition = 'background-color 1s';
+        document.getElementById('result-section').style.display = '';
         if (stackPosition === 'top') {
           definitionSection.insertBefore(dlElem, definitionSection.children[0]);
           window.scrollTo(0, 0);
@@ -224,16 +225,18 @@ function searchButtonClick() {
   var searchText, searchRequest;
 
   function updateSearchResult() {
+    var jsonObject, i, resultDiv, dlElem, dlInner;
+
     if (searchText !== lastSearch) {
       return;
     } else if (searchRequest.readyState === XMLHttpRequest.DONE) {
       if (searchRequest.status === 200) {
-        var jsonObject, i, resultDiv, dlElem, dlInner;
         jsonObject = JSON.parse(searchRequest.responseText); // Array of Objects
         document.getElementById('result-not-exist-span').style.display = 'none';
         document.getElementById('query-span').innerHTML = searchText;
         document.getElementById('num-of-result-span').innerHTML = jsonObject.length;
         document.getElementById('result-exist-span').style.display = 'inline';
+        document.getElementById('result-section').style.display = 'block';
         resultDiv = document.getElementById('result-div');
         while (resultDiv.lastChild) {
           resultDiv.removeChild(resultDiv.lastChild);
@@ -260,7 +263,11 @@ function searchButtonClick() {
           dlInner += jsonObject[i].definition + '</dd>';
           dlElem.innerHTML = dlInner;
         }
-        document.getElementById('result-section').scrollTo(0, 0);
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          window.scrollTo(0, 0);
+        } else {
+          document.getElementById('result-section').scrollTo(0, 0);
+        }
         return;
       } else {
         document.getElementById('result-exist-span').style.display = 'none';
@@ -294,14 +301,21 @@ function searchButtonClick() {
 }
 
 
+function resultCloseButtonClick() {
+  'use strict';
+  
+  document.getElementById('result-section').style.display = '';
+}
+
+
 function invertDirectionButtonClick() {
   'use strict';
   if (stackPosition === 'top') {
     stackPosition = 'bottom';
-    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 아래)';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로<br>(현재: 아래)';
   } else {
     stackPosition = 'top';
-    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 위)';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로<br>(현재: 위)';
   }
 }
 
@@ -322,10 +336,10 @@ function directionButtonClick(e) {
   buttonId = e.currentTarget.getAttribute('id');
   if (buttonId === 'stack-top-button') {
     stackPosition = 'top';
-    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 위)';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로<br>(현재: 위)';
   } else {
     stackPosition = 'bottom';
-    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로(현재: 아래)';
+    document.getElementById('invert-direction-button').innerHTML = '쌓는 방향 반대로<br>(현재: 아래)';
   }
   enableSearch();
 }
@@ -343,6 +357,7 @@ function init() {
     urlPrefix = '/data'; // for test
   }
 
+  document.getElementById('result-close-button').addEventListener('click', resultCloseButtonClick);
   document.getElementById('invert-direction-button').addEventListener('click', invertDirectionButtonClick);
   document.getElementById('stack-top-button').addEventListener('click', directionButtonClick);
   document.getElementById('stack-bottom-button').addEventListener('click', directionButtonClick);
