@@ -316,3 +316,23 @@ button:active {
     max-height: 4.8em;
   }
 }
+
+
+p.survey {
+  font-family: "NanumSquare ExtraBold", "NanumGothic ExtraBold", "NanumGothic", "Malgun Gothic", sans-serif;
+  font-weight: bolder;
+  line-height: 1.4;
+}
+p.survey a {
+  padding: 0.2em 0.3em;
+  color: royalblue;
+}
+p.survey a:hover {
+  background-color: aliceblue;
+}
+p.survey a:visited {
+  color: royalblue;
+}
+p.survey a:active {
+  color: royalblue;
+}

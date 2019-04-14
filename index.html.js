@@ -14,7 +14,7 @@ var urlPrefix, lastSearch, lastDefinition,
 function definitionClick(e) {
   'use strict';
   var definitionWord, definitionRequest;
-  
+
   function split3d(src) {
     var i, j, k, srcsplit, srcsplitlen,
       isUsingLevel = [false, false, false],
@@ -134,7 +134,7 @@ function definitionClick(e) {
         }
         subElem.innerHTML = inner;
         dlElem.appendChild(subElem);
-        
+
         if (jsonObject.pronunciation !== '') {
           subElem = document.createElement('dd');
           subElem.innerHTML = '발음: [' + jsonObject.pronunciation + ']';
@@ -155,7 +155,7 @@ function definitionClick(e) {
           subElem.innerHTML = '품사: ' + jsonObject.pos.replace('\n', ', ');
           dlElem.appendChild(subElem);
         }
-        
+
         subElem = document.createElement('dd');
         inner = '';
         definitionArray = split3d(jsonObject.definition);
@@ -181,7 +181,7 @@ function definitionClick(e) {
         }
         subElem.innerHTML = inner;
         dlElem.appendChild(subElem);
-        
+
         dlElem.style.backgroundColor = 'lightskyblue';
         dlElem.style.transition = 'background-color 1s';
         document.getElementById('result-section').style.display = '';
@@ -245,7 +245,7 @@ function searchButtonClick() {
           dlElem = document.createElement('dl');
           dlElem.addEventListener('click', definitionClick);
           resultDiv.appendChild(dlElem);
-          
+
           dlInner = '<dt>' + jsonObject[i].word;
           if (jsonObject[i].num !== '') {
             dlInner += '<sup>' + jsonObject[i].num.replace(/^0+(\d+?)$/, '$1') + '</sup>';
@@ -303,8 +303,15 @@ function searchButtonClick() {
 
 function resultCloseButtonClick() {
   'use strict';
-  
+
   document.getElementById('result-section').style.display = '';
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    if (stackPosition === 'top') {
+      window.scrollTo(0, 0);
+    } else {
+      window.scrollTo(0, document.getElementById('definition-section').lastElementChild.getBoundingClientRect().top + document.documentElement.scrollTop - 90);
+    }
+  }
 }
 
 
@@ -347,7 +354,7 @@ function directionButtonClick(e) {
 
 function init() {
   'use strict';
-  var searchButton, searchText;
+  var directionSelectDiv, stackTopButton, stackBottomButton, searchButton, searchText;
 
   if (document.domain === '') {
     urlPrefix = './data'; // for local use; it'll not work
@@ -359,8 +366,25 @@ function init() {
 
   document.getElementById('result-close-button').addEventListener('click', resultCloseButtonClick);
   document.getElementById('invert-direction-button').addEventListener('click', invertDirectionButtonClick);
+
+  // scramble stack direction buttons
+  directionSelectDiv = document.getElementById('direction-select-div');
+  stackTopButton = document.createElement('button');
+  stackTopButton.id = 'stack-top-button';
+  stackTopButton.innerHTML = '위';
+  stackBottomButton = document.createElement('button');
+  stackBottomButton.id = 'stack-bottom-button';
+  stackBottomButton.innerHTML = '아래';
+  if (Math.random() < 0.5) {
+    directionSelectDiv.lastElementChild.firstElementChild.appendChild(stackTopButton);
+    directionSelectDiv.lastElementChild.lastElementChild.appendChild(stackBottomButton);
+  } else {
+    directionSelectDiv.lastElementChild.firstElementChild.appendChild(stackBottomButton);
+    directionSelectDiv.lastElementChild.lastElementChild.appendChild(stackTopButton);
+  }
   document.getElementById('stack-top-button').addEventListener('click', directionButtonClick);
   document.getElementById('stack-bottom-button').addEventListener('click', directionButtonClick);
+
   searchButton = document.getElementById('search-button');
   searchText = document.getElementById('search-text');
   searchButton.addEventListener('click', searchButtonClick);

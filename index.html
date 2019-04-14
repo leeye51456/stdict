@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
     <title>누적형 사전</title>
     <link rel="stylesheet" type="text/css" href="index.html.css">
     <script type="text/javascript" src="index.html.js"></script>
@@ -30,6 +31,9 @@
           <button id="result-close-button">❌</button>
         </div>
         <div id="result-found-div">
+          <p class="survey">
+            테스트 후 <a href="https://forms.gle/BiuY3S6Lg1c5kSoC7" target="_blank">간단한 설문조사</a>를 완료해 주세요!
+          </p>
           <p>
             ‘<span id="query-span"></span>’에 대한 검색 결과<span id="result-exist-span">입니다. (총 <span id="num-of-result-span"></span>건)</span><span id="result-not-exist-span">가 존재하지 않습니다.</span>
           </p>
@@ -42,8 +46,8 @@
         <div id="direction-select-div">
           <p>새로 열람하는 표제어를 어느 쪽에 쌓을지 선택하세요.</p>
           <ul>
-            <li><button id="stack-top-button">위</button></li>
-            <li><button id="stack-bottom-button">아래</button></li>
+            <li><!--<button id="stack-top-button">위</button>--></li>
+            <li><!--<button id="stack-bottom-button">아래</button>--></li>
           </ul>
         </div>
       </section> <!-- definition-section -->
