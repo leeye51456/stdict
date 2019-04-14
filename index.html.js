@@ -277,6 +277,7 @@ function searchButtonClick() {
     if (searchText === '') {
       return;
     }
+    document.getElementById('result-found-div').style.display = 'block';
     searchRequest = new XMLHttpRequest();
     if (!searchRequest) {
       return false;
@@ -289,7 +290,6 @@ function searchButtonClick() {
   }
 
   searchText = document.getElementById('search-text').value.trim();
-  document.getElementById('result-found-div').style.display = 'block';
   makeSearchRequest();
 }
 
